@@ -2,6 +2,7 @@
 import Form from "../components/Form";
 import TransactionList from "../components/TransactionList";
 import { useAppStore } from "../stores/useAppStore";
+import { useMemo } from "react";
 
 
 
@@ -9,16 +10,21 @@ export default function IndexPage() {
 
 const transactions = useAppStore((state) => state.transactions)
 
+const { totalIncomes, totalExpenses, totalBalance } = useMemo(() => {
+  const incomes = transactions
+    .filter(tx => tx.type === 'ingreso')
+    .reduce((acc, tx) => acc + tx.amount, 0);
 
-const totalExpenses = transactions
-    .filter(expense => expense.type === 'gasto')
-    .reduce((acc, expense) => acc + expense.amount, 0)
+  const expenses = transactions
+    .filter(tx => tx.type === 'gasto')
+    .reduce((acc, tx) => acc + tx.amount, 0);
 
-const totalIncomes = transactions
-    .filter(income => income.type === 'ingreso')
-    .reduce((acc, income) => acc + income.amount, 0)
-
-const totalBalance = totalIncomes - totalExpenses
+  return {
+    totalIncomes: incomes,
+    totalExpenses: expenses,
+    totalBalance: incomes - expenses
+  };
+}, [transactions]);
 
 
 

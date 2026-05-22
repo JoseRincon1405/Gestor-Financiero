@@ -46,10 +46,14 @@ const lastTenFilteredTransactions = filteredTransactions.slice().reverse().slice
 </div>
         <div>
             {filteredTransactions.length === 0 ? (
-                <p className="text-gray-500 text-center">Aún no hay transacciones...</p>
+                <p className="text-gray-500 text-center py-4">
+                    {selectedCategory 
+                        ? `Aún no hay movimientos en la categoría "${selectedCategory}"` 
+                        : "Aún no hay transacciones registradas..."}
+                </p>
             ) : (
-                
                 <table className="w-full border-collapse">
+                // ... tu tabla intacta ...
                     <thead>
                         <tr className="bg-green-200 rounded-lg">
                             <th className="px-7 py-2 text-left uppercase">Concepto</th>
