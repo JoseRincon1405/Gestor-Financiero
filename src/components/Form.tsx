@@ -12,7 +12,7 @@ export default function Form() {
       type: 'gasto',
       amount: 0,
       description: '',
-      category: 'comida'
+      category: 'Alimentación'
     }
   });
 
@@ -31,7 +31,7 @@ export default function Form() {
 
   return (
     <form
-      /* Cambiado max-w-65 por max-w-sm para fijar el ancho correctamente */
+ 
       className="bg-white shadow-md p-5 max-w-sm my-10 border-2 border-gray-400 rounded-lg w-full" 
       onSubmit={handleSubmit(onSubmit)}
     >
